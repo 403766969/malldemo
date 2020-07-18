@@ -26,7 +26,7 @@ export default {
 <style>
 .goods-list-item {
   position: relative;
-  padding-bottom: 15px;
+  margin: 5px 0 10px 0;
   width: 48%;
   text-align: center;
   background-color: #fff;
@@ -38,9 +38,14 @@ export default {
 }
 
 .goods-info p {
-  white-space: nowrap;
+  /* overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap; */
+  display: -webkit-box;
   overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .goods-info .price {

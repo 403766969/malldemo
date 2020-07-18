@@ -49,7 +49,11 @@ export default {
   background-color: #fff;
 }
 
-#tab-control .tab-control-item span {
+.tab-control-item {
+  flex: 1;
+}
+
+.tab-control-item span {
   padding: 6px;
 }
 

@@ -4,7 +4,11 @@
     <home-swiper :banners="banners" />
     <home-recommend :recommends="recommends" />
     <home-weekpop />
-    <tab-control :tabTitles="['流行','新款','精选']" @tabControlClick="tabControlClick" />
+    <tab-control
+      class="home-tab-control"
+      :tabTitles="['流行','新款','精选']"
+      @tabControlClick="tabControlClick"
+    />
     <goods-list :goods-list="showGoodsList" />
     <h2>首页</h2>
     <h2>首页</h2>
@@ -97,4 +101,10 @@ export default {
 </script>
 
 <style scoped>
+.home-tab-control {
+  position: sticky;
+  left: 0;
+  top: 44px;
+  z-index: 999;
+}
 </style>
