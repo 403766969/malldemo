@@ -1,5 +1,5 @@
 <template>
-  <div id="tab-control">
+  <div class="tab-control">
     <div
       v-for="(item,index) in tabTitles"
       :key="index"
@@ -39,9 +39,10 @@ export default {
 </script>
 
 <style scoped>
-#tab-control {
+.tab-control {
   display: flex;
   justify-content: space-around;
+  width: 100%;
   height: 40px;
   line-height: 40px;
   font-size: 15px;

@@ -1,25 +1,30 @@
 <template>
   <div id="home">
     <home-nav-bar></home-nav-bar>
-    <home-swiper :banners="banners" />
-    <home-recommend :recommends="recommends" />
-    <home-weekpop />
     <tab-control
-      class="home-tab-control"
       :tabTitles="['流行','新款','精选']"
       @tabControlClick="tabControlClick"
+      class="tab-control-fixed"
+      v-show="isTabFixed"
     />
-    <goods-list :goods-list="showGoodsList" />
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
-    <h2>首页</h2>
+    <scroll
+      id="home-scroll"
+      ref="scroll"
+      :probeType="3"
+      :pullUpLoad="{boolean: true, threshold: -80}"
+      :pullDownRefresh="{boolean: true, threshold: 80, stop: 0}"
+      :click="true"
+      :delay="2000"
+      @scroll="scroll"
+      @pullingUp="pullingUp"
+      @pullingDown="pullingDown"
+    >
+      <home-swiper :banners="banners" />
+      <home-recommend :recommends="recommends" />
+      <home-weekpop />
+      <tab-control :tabTitles="['流行','新款','精选']" @tabControlClick="tabControlClick" />
+      <goods-list :goods-list="showGoodsList" />
+    </scroll>
   </div>
 </template>
 
@@ -32,6 +37,7 @@ import HomeWeekpop from 'components/content/home/HomeWeekpop'
 // 首页数据
 import homeData from 'network/homeData'
 // 公共组件
+import Scroll from 'components/common/scroll/Scroll'
 import TabControl from 'components/common/tabcontrol/TabControl'
 import GoodsList from 'components/common/goodsList/GoodsList'
 
@@ -42,6 +48,7 @@ export default {
     HomeSwiper,
     HomeRecommend,
     HomeWeekpop,
+    Scroll,
     TabControl,
     GoodsList
   },
@@ -54,7 +61,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentType: 'pop'
+      currentType: 'pop',
+      isTabFixed: false
     }
   },
   computed: {
@@ -89,6 +97,17 @@ export default {
         default:
           this.currentType = 'pop'
       }
+    },
+    scroll(position) {
+      this.isTabFixed = -position.y >= 675
+    },
+    pullingUp() {
+      console.log('pullingUp')
+      this.getGoodsData(this.currentType)
+    },
+    pullingDown() {
+      console.log('pullingDown')
+      window.location.reload(true)
     }
   },
   created() {
@@ -101,10 +120,16 @@ export default {
 </script>
 
 <style scoped>
-.home-tab-control {
-  position: sticky;
-  left: 0;
+#home-scroll {
+  margin-top: 44px;
+  height: calc(100vh - 44px - 49px);
+  overflow: hidden;
+}
+
+.tab-control-fixed {
+  position: fixed;
   top: 44px;
+  left: 0;
   z-index: 999;
 }
 </style>
