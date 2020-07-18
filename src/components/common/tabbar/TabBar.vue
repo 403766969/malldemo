@@ -18,6 +18,6 @@ export default {
   bottom: 0;
   width: 100%;
   background-color: #f6f6f6;
-  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
 }
 </style>

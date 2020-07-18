@@ -11,22 +11,22 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('views/home/Home')
+    component: () => import('views/Home')
   },
   {
     path: '/category',
     name: 'Category',
-    component: () => import('views/category/Category')
+    component: () => import('views/Category')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import('views/cart/Cart')
+    component: () => import('views/Cart')
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import('views/profile/Profile')
+    component: () => import('views/Profile')
   }
 ]
 
