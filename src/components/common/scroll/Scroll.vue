@@ -47,11 +47,6 @@ export default {
     click: {
       type: Boolean,
       default: false
-    },
-    // 加载或刷新间隔
-    delay: {
-      type: Number,
-      default: 2000
     }
   },
   mounted() {
@@ -74,10 +69,6 @@ export default {
     if (this.pullUpLoad.boolean) {
       this.scroll.on('pullingUp', () => {
         this.$emit('pullingUp')
-        setTimeout(() => {
-          //必须调用此方法才可以进行下次上拉
-          this.scroll.finishPullUp()
-        }, this.delay)
       })
     }
 
@@ -85,25 +76,29 @@ export default {
     if (this.pullDownRefresh.boolean) {
       this.scroll.on('pullingDown', () => {
         this.$emit('pullingDown')
-        setTimeout(() => {
-          //必须调用此方法才可以进行下次下拉
-          this.scroll.finishPullDown()
-        }, this.delay)
       })
     }
   },
   methods: {
-    //1、监听滚动到什么位置
+    //1、滚动到指定位置
     scrollTo(x, y, time = 500) {
       this.scroll && this.scroll.scrollTo(x, y, time)
     },
-    //2、重新计算 better-scroll，当 DOM 结构发生变化的时候务必要调用确保滚动的效果正常。
+    //2、获取当前的Y值
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0
+    },
+    //3、重新计算 better-scroll，当 DOM 结构发生变化的时候务必要调用确保滚动的效果正常。
     refresh() {
       this.scroll && this.scroll.refresh()
     },
-    //3、获取当前的Y值
-    getScrollY() {
-      return this.scroll ? this.scroll.y : 0
+    //4.完成上拉加载
+    finishPullUp() {
+      this.scroll && this.scroll.finishPullUp()
+    },
+    //5.完成上拉刷新
+    finishPullDown() {
+      this.scroll && this.scroll.finishPullDown()
     }
   }
 }

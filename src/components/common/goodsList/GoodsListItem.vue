@@ -1,9 +1,9 @@
 <template>
-  <div class="goods-list-item">
-    <img :src="goodsListItem.show.img" />
+  <div class="goods-list-item" @click="itemClick">
+    <img :src="showImage" @load="goodsListImagesLoad" />
     <div class="goods-info">
       <p>{{goodsListItem.title}}</p>
-      <span class="price">{{goodsListItem.price}}</span>
+      <span class="price">￥{{goodsListItem.price}}</span>
       <span class="collect">{{goodsListItem.cfav}}</span>
     </div>
   </div>
@@ -17,6 +17,23 @@ export default {
       type: Object,
       default() {
         return {}
+      }
+    }
+  },
+  computed: {
+    showImage() {
+      return this.goodsListItem.img || this.goodsListItem.image || this.goodsListItem.show.img
+    }
+  },
+  methods: {
+    goodsListImagesLoad() {
+      if (this.$route.name === 'Home') {
+        this.$bus.$emit('goodsListImagesLoad')
+      }
+    },
+    itemClick() {
+      if (this.$route.name === 'Home') {
+        this.$router.push('/detail/' + this.goodsListItem.iid)
       }
     }
   }
@@ -35,6 +52,11 @@ export default {
 .goods-list-item img {
   width: 100%;
   border-radius: 5px;
+}
+
+.goods-info {
+  line-height: 1.5em;
+  font-size: 16px;
 }
 
 .goods-info p {

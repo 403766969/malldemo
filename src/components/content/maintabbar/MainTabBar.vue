@@ -22,7 +22,7 @@
         <div>分类</div>
       </template>
     </tab-bar-item>
-    <tab-bar-item path="/shopcart" activeColor="#ff5777">
+    <tab-bar-item path="/cart" activeColor="#ff5777">
       <template #tab-bar-item-icon>
         <img src="~assets/img/tabbar/shopcart.svg" alt="shopcart" />
       </template>
