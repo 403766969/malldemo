@@ -9,12 +9,12 @@
       @pullingDown="pullingDown"
     >
       <cart-goods-list :cartGoods="cartGoods" />
-      <cart-bottom-bar
-        :bottomBarMsg="bottomBarMsg"
-        :is-show-delete="isShowDelete"
-        @cancelClick="cancelClick"
-      />
     </scroll>
+    <cart-bottom-bar
+      :bottomBarMsg="bottomBarMsg"
+      :is-show-delete="isShowDelete"
+      @cancelClick="cancelClick"
+    />
   </div>
 </template>
 

@@ -14,17 +14,6 @@ const state = {
       iid: '1m745k0',
       img: '//s11.mogucdn.com/mlcdn/c45406/180822_3j9j174g9laj1h7a1ii4786jgghb1_640x960.jpg',
       name: '2018秋季新款韩版女装字母印花宽松连帽休闲卫衣搭配松紧腰九分牛仔裤两件套女时尚运动套装潮'
-    },
-    {
-      checked: true,
-      count: 1,
-      price: '68.00',
-      shop: '倩雪香宜定制女装',
-      size: 'S1',
-      style: '单白色卫衣1',
-      iid: '1jw0sr2',
-      img: '//s11.mogucdn.com/mlcdn/c45406/180822_3j9j174g9laj1h7a1ii4786jgghb1_640x960.jpg',
-      name: '2018秋季新款韩版女装字母印花宽松连帽休闲卫衣搭配松紧腰九分牛仔裤两件套女时尚运动套装潮'
     }
   ]
 }
