@@ -15,7 +15,6 @@ export default {
   position: fixed;
   bottom: 50px;
   right: 10px;
-  cursor: pointer;
 }
 .back-top img {
   width: 50px;

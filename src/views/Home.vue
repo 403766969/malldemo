@@ -1,6 +1,14 @@
 <template>
   <div id="home">
     <home-nav-bar />
+    <div v-show="isShowRefreshMsg" class="refreshMsg">{{refreshMsg}}</div>
+    <tab-control
+      ref="tabControlFixed"
+      :tabTitles="['流行','新款','精选']"
+      @tabControlClick="tabControlClick"
+      class="tab-control-fixed"
+      v-show="isShowTabFixed"
+    />
     <scroll
       class="home-scroll"
       ref="scroll"
@@ -23,15 +31,7 @@
       <goods-list :goods-list="showGoodsList" />
       <div class="loadMsg">上拉加载更多</div>
     </scroll>
-    <tab-control
-      ref="tabControlFixed"
-      :tabTitles="['流行','新款','精选']"
-      @tabControlClick="tabControlClick"
-      class="tab-control-fixed"
-      v-show="isShowTabFixed"
-    />
     <back-top v-show="isShowBackTop" @click.native="backTopClick" />
-    <div v-show="isShowRefreshMsg" class="refreshMsg">{{refreshMsg}}</div>
   </div>
 </template>
 
@@ -47,7 +47,7 @@ import HomeWeekpop from 'components/content/home/HomeWeekpop'
 import Scroll from 'components/common/scroll/Scroll'
 import TabControl from 'components/common/tabcontrol/TabControl'
 import GoodsList from 'components/common/goodsList/GoodsList'
-import BackTop from 'components/common/backtop/BackTop'
+import BackTop from 'components/content/backtop/BackTop'
 // 工具函数
 import { debounce } from 'common/utils'
 
@@ -161,8 +161,8 @@ export default {
   },
   activated() {
     // 进入页面时重新设置滚动位置
-    this.$refs.scroll.scrollTo(0, this.saveY, 10)
     this.$refs.scroll.refresh()
+    this.$refs.scroll.scrollTo(0, this.saveY, 10)
   },
   deactivated() {
     // 记录离开页面时的滚动位置

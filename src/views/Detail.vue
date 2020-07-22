@@ -1,11 +1,11 @@
 <template>
   <div id="detail">
     <detail-nav-bar @detailTitleClick="detailTitleClick" ref="detailNavBar" />
+    <div v-show="isShowRefreshMsg" class="refreshMsg">{{refreshMsg}}</div>
     <scroll
       class="detail-scroll"
       ref="scroll"
       :probeType="3"
-      :pullUpLoad="{boolean: true, threshold: -80}"
       :pullDownRefresh="{boolean: true, threshold: 80, stop: 0}"
       :click="true"
       @scroll="scroll"
@@ -19,8 +19,15 @@
       <detail-goods-comment :goods-comment="goodsComment" ref="detailGoodsComment" />
       <goods-list :goods-list="recommends" ref="goodsList" />
     </scroll>
+    <detail-bottom-bar @openBuyOptions="openBuyOptions" />
+    <detail-buy-options
+      v-show="isShowBuyOptions"
+      :buy-options="buyOptions"
+      @closeBuyOptions="closeBuyOptions"
+      @commitClick="commitClick"
+      ref="detailBuyOptions"
+    />
     <back-top v-show="isShowBackTop" @click.native="backTopClick" />
-    <div v-show="isShowRefreshMsg" class="refreshMsg">{{refreshMsg}}</div>
   </div>
 </template>
 
@@ -33,13 +40,19 @@ import DetailShopInfo from 'components/content/detail/DetailShopInfo'
 import DetailGoodsInfo from 'components/content/detail/DetailGoodsInfo'
 import DetailGoodsParam from 'components/content/detail/DetailGoodsParam'
 import DetailGoodsComment from 'components/content/detail/DetailGoodsComment'
+import DetailBottomBar from 'components/content/detail/DetailBottomBar'
+import DetailBuyOptions from 'components/content/detail/DetailBuyOptions'
 // 商品详情页数据
 import detailData from 'network/detailData'
 import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailData'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/common/goodsList/GoodsList'
-import BackTop from 'components/common/backtop/BackTop'
+import BackTop from 'components/content/backtop/BackTop'
+// 自定义插件
+import Toast from 'components/common/toast/Toast'
+// mapActions
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Detail',
@@ -51,6 +64,8 @@ export default {
     DetailGoodsInfo,
     DetailGoodsParam,
     DetailGoodsComment,
+    DetailBottomBar,
+    DetailBuyOptions,
     Scroll,
     GoodsList,
     BackTop
@@ -65,10 +80,11 @@ export default {
       goodsParam: {},
       goodsComment: {},
       recommends: [],
+      buyOptions: {},
       offsetTops: [],
+      isShowBuyOptions: false,
       isShowBackTop: false,
       isShowRefreshMsg: false,
-      scrollUpdate: null,
       refreshMsg: ''
     }
   },
@@ -118,6 +134,38 @@ export default {
     // 返回顶部
     backTopClick() {
       this.$refs.scroll.scrollTo(0, 0, 500)
+    },
+    // 打开购物车
+    openBuyOptions() {
+      this.isShowBuyOptions = true
+    },
+    // 关闭购物车
+    closeBuyOptions() {
+      this.isShowBuyOptions = false
+    },
+    // 映射this.addCartGoods()为this.$store.dispatch('cart/addCartGoods')
+    ...mapActions({
+      addCartGoods: 'cart/addCartGoods'
+    }),
+    // 往购物车中添加商品
+    commitClick(product) {
+      // 1.获取购物车需要展示的信息
+      let newGoods = {}
+      newGoods.iid = this.iid
+      newGoods.name = this.baseInfo.title
+      newGoods.shop = this.shopInfo.name
+      newGoods.img = product.img
+      newGoods.style = product.style
+      newGoods.size = product.size
+      newGoods.price = product.price
+      newGoods.count = product.count
+      // 2.将商品加入到购物车执行成功后调用then(Vuex)
+      this.addCartGoods(newGoods).then(res => {
+        this.isShowBuyOptions = false
+        this.$toast.showToast(res, 800)
+      }).catch(err => {
+        this.$toast.showToast(err, 800)
+      })
     }
   },
   created() {
@@ -140,6 +188,8 @@ export default {
       if (data.rate.cRate > 0) {
         this.goodsComment = data.rate.list[0]
       }
+      // 购买选项信息
+      this.buyOptions = data.skuInfo
     })
     // 3.请求推荐信息
     detailData.getRecommend().then(res => {
@@ -160,6 +210,7 @@ export default {
   position: relative;
   height: calc(100vh - 44px - 49px);
   overflow: hidden;
+  background-color: #fff;
 }
 
 .refreshMsg {

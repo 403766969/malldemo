@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <nav-bar class="detail-nav-bar">
-      <template #nav-bar-left>
-        <div class="detailImg" @click="detailBackClick">
-          <img src="~assets/img/common/back.svg" alt="返回" />
-        </div>
-      </template>
-      <template #nav-bar-center>
-        <div class="title">
-          <div
-            v-for="(item,index) in titles"
-            :key="index"
-            :class="{active:currentIndex===index}"
-            @click="detailTitleClick(index)"
-          >{{item}}</div>
-        </div>
-      </template>
-    </nav-bar>
-  </div>
+  <nav-bar class="detail-nav-bar">
+    <template #nav-bar-left>
+      <div class="detailImg" @click="detailBackClick">
+        <img src="~assets/img/common/back.svg" alt="返回" />
+      </div>
+    </template>
+    <template #nav-bar-center>
+      <div class="title">
+        <div
+          v-for="(item,index) in titles"
+          :key="index"
+          :class="{active:currentIndex===index}"
+          @click="detailTitleClick(index)"
+        >{{item}}</div>
+      </div>
+    </template>
+  </nav-bar>
 </template>
 
 <script>
