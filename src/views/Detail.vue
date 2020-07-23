@@ -48,11 +48,12 @@ import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailData'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/common/goodsList/GoodsList'
-import BackTop from 'components/content/backtop/BackTop'
 // 自定义插件
 import Toast from 'components/common/toast/Toast'
 // mapActions
 import { mapActions } from 'vuex'
+// 混入
+import { backTopMixin } from 'common/mixin'
 
 export default {
   name: 'Detail',
@@ -67,8 +68,7 @@ export default {
     DetailBottomBar,
     DetailBuyOptions,
     Scroll,
-    GoodsList,
-    BackTop
+    GoodsList
   },
   data() {
     return {
@@ -83,9 +83,10 @@ export default {
       buyOptions: {},
       offsetTops: [],
       isShowBuyOptions: false,
-      isShowBackTop: false,
       isShowRefreshMsg: false,
-      refreshMsg: ''
+      refreshMsg: '',
+      isClickNavTab: false,
+      clickNavTabTimer: null
     }
   },
   methods: {
@@ -98,14 +99,16 @@ export default {
       } else {
         this.refreshMsg = '↓下拉刷新'
       }
-      if (-position.y < this.$refs.detailGoodsParam.$el.offsetTop) {
-        this.$refs.detailNavBar.currentIndex = 0
-      } else if (-position.y < this.$refs.detailGoodsComment.$el.offsetTop) {
-        this.$refs.detailNavBar.currentIndex = 1
-      } else if (-position.y < this.$refs.goodsList.$el.offsetTop) {
-        this.$refs.detailNavBar.currentIndex = 2
-      } else {
-        this.$refs.detailNavBar.currentIndex = 3
+      if (!this.isClickNavTab) {
+        if (-position.y < this.$refs.detailGoodsParam.$el.offsetTop) {
+          this.$refs.detailNavBar.currentIndex = 0
+        } else if (-position.y < this.$refs.detailGoodsComment.$el.offsetTop) {
+          this.$refs.detailNavBar.currentIndex = 1
+        } else if (-position.y < this.$refs.goodsList.$el.offsetTop) {
+          this.$refs.detailNavBar.currentIndex = 2
+        } else {
+          this.$refs.detailNavBar.currentIndex = 3
+        }
       }
     },
     // 下拉刷新
@@ -114,26 +117,32 @@ export default {
     },
     // 标签点击处理
     detailTitleClick(index) {
+      this.isClickNavTab = true
+      if (this.clickNavTabTimer) {
+        clearTimeout(this.clickNavTabTimer)
+      }
+      this.clickNavTabTimer = setTimeout(() => { this.isClickNavTab = false }, 500)
       switch (index) {
         case 0:
           this.$refs.scroll.scrollTo(0, -this.$refs.detailSwiper.$el.offsetTop, 500)
+          this.$refs.detailNavBar.currentIndex = 0
           break
         case 1:
           this.$refs.scroll.scrollTo(0, -this.$refs.detailGoodsParam.$el.offsetTop, 500)
+          this.$refs.detailNavBar.currentIndex = 1
           break
         case 2:
           this.$refs.scroll.scrollTo(0, -this.$refs.detailGoodsComment.$el.offsetTop, 500)
+          this.$refs.detailNavBar.currentIndex = 2
           break
         case 3:
           this.$refs.scroll.scrollTo(0, -this.$refs.goodsList.$el.offsetTop, 500)
+          this.$refs.detailNavBar.currentIndex = 3
           break
         default:
           this.$refs.scroll.scrollTo(0, -this.$refs.detailSwiper.$el.offsetTop, 500)
+          this.$refs.detailNavBar.currentIndex = 0
       }
-    },
-    // 返回顶部
-    backTopClick() {
-      this.$refs.scroll.scrollTo(0, 0, 500)
     },
     // 打开购物车
     openBuyOptions() {
@@ -168,6 +177,8 @@ export default {
       })
     }
   },
+  // 混入
+  mixins: [backTopMixin],
   created() {
     // 1、保存传入的iid
     this.iid = this.$route.params.iid

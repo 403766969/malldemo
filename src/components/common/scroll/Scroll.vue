@@ -69,6 +69,10 @@ export default {
     if (this.pullUpLoad.boolean) {
       this.scroll.on('pullingUp', () => {
         this.$emit('pullingUp')
+        setTimeout(() => {
+          //必须调用此方法才可以进行下次上拉,1.5秒可以拉取一次
+          this.scroll.finishPullUp()
+        }, 1500)
       })
     }
 

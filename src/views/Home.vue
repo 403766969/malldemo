@@ -47,9 +47,11 @@ import HomeWeekpop from 'components/content/home/HomeWeekpop'
 import Scroll from 'components/common/scroll/Scroll'
 import TabControl from 'components/common/tabcontrol/TabControl'
 import GoodsList from 'components/common/goodsList/GoodsList'
-import BackTop from 'components/content/backtop/BackTop'
-// 工具函数
+// 公共函数
 import { debounce } from 'common/utils'
+// 混入
+import { backTopMixin } from 'common/mixin'
+
 
 export default {
   name: 'Home',
@@ -60,8 +62,7 @@ export default {
     HomeWeekpop,
     Scroll,
     TabControl,
-    GoodsList,
-    BackTop
+    GoodsList
   },
   data() {
     return {
@@ -74,7 +75,6 @@ export default {
       },
       currentType: 'pop',
       isShowTabFixed: false,
-      isShowBackTop: false,
       isShowRefreshMsg: false,
       refreshMsg: '',
       saveY: 0
@@ -118,10 +118,6 @@ export default {
       this.$refs.tabControl.currentIndex = index;
       this.$refs.tabControlFixed.currentIndex = index;
     },
-    // 返回顶部点击处理
-    backTopClick() {
-      this.$refs.scroll.scrollTo(0, 0, 500)
-    },
     // 滚动处理
     scroll(position) {
       this.isShowTabFixed = (-position.y >= this.$refs.tabControl.$el.offsetTop)
@@ -142,6 +138,8 @@ export default {
       window.location.reload(true)
     }
   },
+  // 混入
+  mixins: [backTopMixin],
   created() {
     // 组件插件完成请求数据
     this.getMultiData()
@@ -153,7 +151,6 @@ export default {
     // 页面数据更新时刷新滚动
     const scrollUpdate = debounce(() => {
       this.$refs.scroll.refresh()
-      this.$refs.scroll.finishPullUp()
     }, 200)
     this.$bus.$off('imaggoodsListImagesLoadeLoad').$on('goodsListImagesLoad', () => {
       scrollUpdate()
