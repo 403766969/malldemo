@@ -141,10 +141,10 @@ export default {
 .detail-buy-options {
   position: fixed;
   top: 44px;
+  bottom: 0;
   left: 0;
   z-index: 888;
   width: 100%;
-  height: calc(100vh - 44px);
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -156,7 +156,7 @@ export default {
   bottom: 0;
   padding: 8px;
   width: 100%;
-  height: 60vh;
+  height: 60%;
   background-color: #fff;
   animation: openBuyOptions 0.6s ease-out;
 }

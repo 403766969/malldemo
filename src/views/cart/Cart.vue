@@ -1,6 +1,10 @@
 <template>
   <div id="cart">
-    <cart-nav-bar :cartGoodsLength="cartGoodsLength" @manageClick="manageClick" />
+    <cart-nav-bar
+      :cartGoodsLength="cartGoodsLength"
+      @manageClick="manageClick"
+      @cancelClick="cancelClick"
+    />
     <scroll
       class="cart-scroll"
       ref="scroll"
@@ -10,19 +14,15 @@
     >
       <cart-goods-list :cartGoods="cartGoods" />
     </scroll>
-    <cart-bottom-bar
-      :bottomBarMsg="bottomBarMsg"
-      :is-show-delete="isShowDelete"
-      @cancelClick="cancelClick"
-    />
+    <cart-bottom-bar :bottomBarMsg="bottomBarMsg" />
   </div>
 </template>
 
 <script>
 // 购物车页组件
-import CartNavBar from 'components/content/cart/CartNavBar'
-import CartGoodsList from 'components/content/cart/CartGoodsList'
-import CartBottomBar from 'components/content/cart/CartBottomBar'
+import CartNavBar from 'views/cart/components/CartNavBar'
+import CartGoodsList from 'views/cart/components/CartGoodsList'
+import CartBottomBar from 'views/cart/components/CartBottomBar'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
 // mapGetters
@@ -38,8 +38,7 @@ export default {
   },
   data() {
     return {
-      bottomBarMsg: '结算',
-      isShowDelete: false
+      bottomBarMsg: '结算'
     }
   },
   computed: {
@@ -56,26 +55,31 @@ export default {
     // 管理购物车
     manageClick() {
       this.bottomBarMsg = '删除'
-      this.isShowDelete = true
     },
     // 取消管理
     cancelClick() {
       this.bottomBarMsg = '结算'
-      this.isShowDelete = false
     }
+  },
+  activated() {
+    this.$refs.scroll.refresh()
   }
 }
 </script>
 
 <style scoped>
 #cart {
-  padding-top: 44px;
+  padding: 44px 0 89px 0;
   width: 100%;
-  height: 100vh;
+  background-color: #fff;
 }
 
 .cart-scroll {
-  height: calc(100vh - 44px - 49px - 40px);
+  position: fixed;
+  top: 44px;
+  bottom: 89px;
+  left: 0;
+  width: 100%;
   overflow: hidden;
   background-color: #fff;
 }

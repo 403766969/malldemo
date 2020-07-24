@@ -39,14 +39,14 @@
 // 首页数据
 import homeData from 'network/homeData'
 // 首页组件
-import HomeNavBar from 'components/content/home/HomeNavBar'
-import HomeSwiper from 'components/content/home/HomeSwiper'
-import HomeRecommend from 'components/content/home/HomeRecommend'
-import HomeWeekpop from 'components/content/home/HomeWeekpop'
+import HomeNavBar from 'views/home/components/HomeNavBar'
+import HomeSwiper from 'views/home/components/HomeSwiper'
+import HomeRecommend from 'views/home/components/HomeRecommend'
+import HomeWeekpop from 'views/home/components/HomeWeekpop'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
 import TabControl from 'components/common/tabcontrol/TabControl'
-import GoodsList from 'components/common/goodsList/GoodsList'
+import GoodsList from 'components/content/goodsList/GoodsList'
 // 公共函数
 import { debounce } from 'common/utils'
 // 混入
@@ -170,15 +170,19 @@ export default {
 
 <style scoped>
 #home {
-  padding-top: 44px;
+  padding: 44px 0 49px 0;
   width: 100%;
-  height: 100vh;
+  background-color: #fff;
 }
 
 .home-scroll {
-  position: relative;
-  height: calc(100vh - 44px - 49px);
+  position: fixed;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  width: 100%;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .tab-control-fixed {

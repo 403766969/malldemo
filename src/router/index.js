@@ -11,27 +11,27 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('views/Home')
+    component: () => import('views/home/Home')
   },
   {
     path: '/category',
     name: 'Category',
-    component: () => import('views/Category')
+    component: () => import('views/category/Category')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import('views/Cart')
+    component: () => import('views/cart/Cart')
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: () => import('views/Profile')
+    component: () => import('views/profile/Profile')
   },
   {
     path: '/detail/:iid',
     name: 'Detail',
-    component: () => import('views/Detail')
+    component: () => import('views/detail/Detail')
   }
 ]
 

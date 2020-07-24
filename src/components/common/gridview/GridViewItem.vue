@@ -1,12 +1,12 @@
 <template>
-  <div id="category">
-    <h2>分类</h2>
+  <div class="grid-view-item">
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Category'
+  name: 'GridViewItem'
 }
 </script>
 

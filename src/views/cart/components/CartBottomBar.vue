@@ -4,17 +4,16 @@
       <cart-check-button class="check-btn" :is-checked="isCheckAll" />
       <span>全选</span>
     </div>
-    <div class="total-price" v-show="!isShowDelete">
+    <div class="total-price">
       合计：
       <span>￥{{totalPrice}}</span>
     </div>
-    <div class="cancel" @click="cancelClick" v-show="isShowDelete">取消</div>
     <div class="calculation" @click="calculationClick">{{bottomBarMsg}}({{totalCount}})</div>
   </div>
 </template>
 
 <script>
-import CartCheckButton from 'components/content/cart/CartCheckButton'
+import CartCheckButton from 'views/cart/components/CartCheckButton'
 // mapGetters mapMutations
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -27,10 +26,6 @@ export default {
     bottomBarMsg: {
       type: String,
       default: '结算'
-    },
-    isShowDelete: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
@@ -86,11 +81,6 @@ export default {
           this.deleteProduct()
         }
       }
-    },
-
-    // 点击取消
-    cancelClick() {
-      this.$emit('cancelClick');
     }
   }
 }
@@ -133,11 +123,6 @@ export default {
 
 .total-price span {
   color: var(--color-tint);
-}
-
-.cancel {
-  color: white;
-  background-color: var(--color-tint);
 }
 
 .calculation {

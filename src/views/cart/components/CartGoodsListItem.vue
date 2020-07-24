@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import CartCheckButton from 'components/content/cart/CartCheckButton'
+import CartCheckButton from 'views/cart/components/CartCheckButton'
 // mapMutations
 import { mapMutations } from 'vuex'
 

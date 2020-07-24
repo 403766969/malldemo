@@ -1,7 +1,7 @@
 <template>
-  <nav-bar class="profile-nav-bar">
+  <nav-bar class="category-nav-bar">
     <template #nav-bar-center>
-      <h3>我的</h3>
+      <h3>分类</h3>
     </template>
   </nav-bar>
 </template>
@@ -10,7 +10,7 @@
 import NavBar from 'components/common/navbar/NavBar'
 
 export default {
-  name: 'ProfileNavBar',
+  name: 'CategoryNavBar',
   components: {
     NavBar
   }
@@ -18,9 +18,8 @@ export default {
 </script>
 
 <style scoped>
-.profile-nav-bar {
+.category-nav-bar {
   color: #fff;
   background-color: var(--color-tint);
-  box-shadow: none;
 }
 </style>

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <a href="https://act.mogujie.com/zzlx67">
-      <img src="~assets/img/home/weekpop.jpg" alt="weekpop" />
-    </a>
+    <img src="~assets/img/home/weekpop.jpg" alt="weekpop" />
   </div>
 </template>
 

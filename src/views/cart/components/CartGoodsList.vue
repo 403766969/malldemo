@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CartGoodsListItem from 'components/content/cart/CartGoodsListItem'
+import CartGoodsListItem from 'views/cart/components/CartGoodsListItem'
 
 export default {
   name: 'CartGoodsList',

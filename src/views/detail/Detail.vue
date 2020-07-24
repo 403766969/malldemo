@@ -33,21 +33,21 @@
 
 <script>
 // 商品详情页组件
-import DetailNavBar from 'components/content/detail/DetailNavBar'
-import DetailSwiper from 'components/content/detail/DetailSwiper'
-import DetailBaseInfo from 'components/content/detail/DetailBaseInfo'
-import DetailShopInfo from 'components/content/detail/DetailShopInfo'
-import DetailGoodsInfo from 'components/content/detail/DetailGoodsInfo'
-import DetailGoodsParam from 'components/content/detail/DetailGoodsParam'
-import DetailGoodsComment from 'components/content/detail/DetailGoodsComment'
-import DetailBottomBar from 'components/content/detail/DetailBottomBar'
-import DetailBuyOptions from 'components/content/detail/DetailBuyOptions'
+import DetailNavBar from 'views/detail/components/DetailNavBar'
+import DetailSwiper from 'views/detail/components/DetailSwiper'
+import DetailBaseInfo from 'views/detail/components/DetailBaseInfo'
+import DetailShopInfo from 'views/detail/components/DetailShopInfo'
+import DetailGoodsInfo from 'views/detail/components/DetailGoodsInfo'
+import DetailGoodsParam from 'views/detail/components/DetailGoodsParam'
+import DetailGoodsComment from 'views/detail/components/DetailGoodsComment'
+import DetailBottomBar from 'views/detail/components/DetailBottomBar'
+import DetailBuyOptions from 'views/detail/components/DetailBuyOptions'
 // 商品详情页数据
 import detailData from 'network/detailData'
 import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailData'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
-import GoodsList from 'components/common/goodsList/GoodsList'
+import GoodsList from 'components/content/goodsList/GoodsList'
 // 自定义插件
 import Toast from 'components/common/toast/Toast'
 // mapActions
@@ -212,14 +212,17 @@ export default {
 
 <style scoped>
 #detail {
-  padding-top: 44px;
+  padding: 44px 0 49px 0;
   width: 100%;
-  height: 100vh;
+  background-color: #fff;
 }
 
 .detail-scroll {
-  position: relative;
-  height: calc(100vh - 44px - 49px);
+  position: fixed;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  width: 100%;
   overflow: hidden;
   background-color: #fff;
 }

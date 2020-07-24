@@ -1,10 +1,10 @@
 <template>
   <nav-bar class="cart-nav-bar">
     <template #nav-bar-center>
-      <div class="title">购物车({{cartGoodsLength}})</div>
+      <h3 class="title">购物车({{cartGoodsLength}})</h3>
     </template>
     <template #nav-bar-right>
-      <div class="manageBtn" @click="manageClick">管理</div>
+      <div class="navBarBtn" @click="navBarClick">{{navBarMsg}}</div>
     </template>
   </nav-bar>
 </template>
@@ -23,9 +23,20 @@ export default {
       default: 0
     }
   },
+  data() {
+    return {
+      navBarMsg: '管理'
+    }
+  },
   methods: {
-    manageClick() {
-      this.$emit('manageClick')
+    navBarClick() {
+      if (this.navBarMsg.indexOf('管理') !== -1) {
+        this.navBarMsg = '取消'
+        this.$emit('manageClick')
+      } else if (this.navBarMsg.indexOf('取消') !== -1) {
+        this.navBarMsg = '管理'
+        this.$emit('cancelClick')
+      }
     }
   }
 }
