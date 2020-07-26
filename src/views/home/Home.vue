@@ -37,7 +37,7 @@
 
 <script>
 // 首页数据
-import homeData from 'network/homeData'
+import homeDataByAxios from 'network/homeDataByAxios'
 // 首页组件
 import HomeNavBar from 'views/home/components/HomeNavBar'
 import HomeSwiper from 'views/home/components/HomeSwiper'
@@ -88,7 +88,7 @@ export default {
   methods: {
     // 获取轮播图和推荐数据
     getMultiData() {
-      homeData.getMultiData().then(res => {
+      homeDataByAxios.getMultiData().then(res => {
         this.banners = res.data.banner.list
         this.recommends = res.data.recommend.list
       })
@@ -96,7 +96,7 @@ export default {
     // 获取商品列表
     getGoodsData(type) {
       this.goodsList[type].page++
-      homeData.getGoodsData(type, this.goodsList[type].page).then(res => {
+      homeDataByAxios.getGoodsData(type, this.goodsList[type].page).then(res => {
         this.goodsList[type].list.push(...res.data.list)
       })
     },

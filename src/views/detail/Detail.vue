@@ -43,8 +43,8 @@ import DetailGoodsComment from 'views/detail/components/DetailGoodsComment'
 import DetailBottomBar from 'views/detail/components/DetailBottomBar'
 import DetailBuyOptions from 'views/detail/components/DetailBuyOptions'
 // 商品详情页数据
-import detailData from 'network/detailData'
-import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailData'
+import detailDataByAxios from 'network/detailDataByAxios'
+import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailDataByAxios'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/content/goodsList/GoodsList'
@@ -183,7 +183,7 @@ export default {
     // 1、保存传入的iid
     this.iid = this.$route.params.iid
     // 2.根据iid请求数据
-    detailData.getDetailData(this.iid).then(res => {
+    detailDataByAxios.getDetailData(this.iid).then(res => {
       const data = res.result
       // 商品轮播图
       this.topImages = data.itemInfo.topImages
@@ -203,7 +203,7 @@ export default {
       this.buyOptions = data.skuInfo
     })
     // 3.请求推荐信息
-    detailData.getRecommend().then(res => {
+    detailDataByAxios.getRecommend().then(res => {
       this.recommends = res.data.list
     })
   }

@@ -13,7 +13,7 @@
 <script>
 import Vue from 'vue'
 // 分类页面数据
-import categoryData from 'network/categoryData'
+import categoryDataByAxios from 'network/categoryDataByAxios'
 // 分类页面组件
 import CategoryNavBar from 'views/category/components/CategoryNavBar'
 import CategoryGridView from 'views/category/components/CategoryGridView'
@@ -44,7 +44,7 @@ export default {
   methods: {
     // 获取分类
     getCategory() {
-      categoryData.getCategory().then(res => {
+      categoryDataByAxios.getCategory().then(res => {
         this.categories = res.data.category.list
         this.categories.forEach((item, index) => {
           this.getSubcategory(item.maitKey, index)
@@ -53,7 +53,7 @@ export default {
     },
     // 获取子分类
     getSubcategory(maitKey, index) {
-      categoryData.getSubcategory(maitKey).then(res => {
+      categoryDataByAxios.getSubcategory(maitKey).then(res => {
         Vue.set(this.subcategories, index, res.data.list)
       })
     },

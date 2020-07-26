@@ -7,6 +7,7 @@ import store from './store'
 import toast from 'components/common/toast'
 
 import VueLazyload from 'vue-lazyload'
+
 import FastClick from 'fastclick'
 
 Vue.config.productionTip = false
@@ -21,7 +22,7 @@ Vue.use(VueLazyload, {
   loading: require('./assets/img/common/timg.gif')
 })
 
-// 解决移动端的点击00ms延迟
+// 解决移动端的点击300ms延迟
 FastClick.attach(document.body)
 
 new Vue({

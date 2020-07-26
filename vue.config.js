@@ -12,10 +12,10 @@ module.exports = {
       .set('common', resolve('./src/common'))
       .set('components', resolve('./src/components'))
       .set('network', resolve('./src/network'))
-      .set('views', resolve('./src/views'));
+      .set('views', resolve('./src/views'))
   },
   devServer: {
     open: true
   },
-  publicPath: process.env.NODE_ENV === 'production' ? '/malldemo/' : '/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/mallpro/' : '/'
 };
