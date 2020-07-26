@@ -22,4 +22,8 @@ export default {
   color: #fff;
   background-color: var(--color-tint);
 }
+
+.category-nav-bar h3 {
+  font-size: 18px;
+}
 </style>

@@ -68,4 +68,9 @@ export default {
   height: 100%;
   align-items: center;
 }
+
+.detailImg img {
+  width: 22px;
+  height: 22px;
+}
 </style>

@@ -18,6 +18,8 @@ export default {
 
 <style scoped>
 .check-button img {
+  width: 16px;
+  height: 16px;
   background-color: #999;
   border-radius: 50%;
 }

@@ -42,6 +42,7 @@ export default {
 
 .info .login {
   margin-top: 5px;
+  font-size: 16px;
 }
 
 .info .phone {

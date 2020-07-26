@@ -22,4 +22,8 @@ export default {
   color: #fff;
   background-color: var(--color-tint);
 }
+
+.profile-nav-bar h3 {
+  font-size: 18px;
+}
 </style>

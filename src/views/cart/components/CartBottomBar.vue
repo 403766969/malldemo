@@ -94,6 +94,7 @@ export default {
   left: 0;
   width: 100%;
   height: 40px;
+  font-size: 16px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 

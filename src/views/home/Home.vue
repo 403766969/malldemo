@@ -180,9 +180,9 @@ export default {
   top: 44px;
   bottom: 49px;
   left: 0;
+  z-index: 1;
   width: 100%;
   overflow: hidden;
-  background-color: #fff;
 }
 
 .tab-control-fixed {
@@ -196,10 +196,10 @@ export default {
   position: absolute;
   left: 0;
   top: 44px;
-  z-index: -1;
   width: 100%;
   height: 40px;
   line-height: 40px;
+  font-size: 15px;
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -208,6 +208,7 @@ export default {
   width: 100%;
   height: 40px;
   line-height: 40px;
+  font-size: 15px;
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
 }

@@ -47,6 +47,7 @@ export default {
 }
 
 .info-title {
+  font-size: 16px;
   color: #222;
 }
 

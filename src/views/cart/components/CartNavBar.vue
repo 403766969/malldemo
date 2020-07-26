@@ -47,4 +47,12 @@ export default {
   color: white;
   background-color: var(--color-tint);
 }
+
+.cart-nav-bar h3 {
+  font-size: 18px;
+}
+
+.cart-nav-bar .navBarBtn {
+  font-size: 16px;
+}
 </style>
