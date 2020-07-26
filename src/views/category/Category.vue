@@ -13,8 +13,8 @@
 <script>
 import Vue from 'vue'
 // 分类页面数据
-// import categoryDataByAxios from 'network/categoryDataByAxios'
-import categoryDataByJsonp from 'network/categoryDataByJsonp'
+import categoryDataByAxios from 'network/categoryDataByAxios'
+// import categoryDataByJsonp from 'network/categoryDataByJsonp'
 // 分类页面组件
 import CategoryNavBar from 'views/category/components/CategoryNavBar'
 import CategoryGridView from 'views/category/components/CategoryGridView'
@@ -46,30 +46,30 @@ export default {
     // 获取分类
     getCategory() {
       // axios
-      // categoryDataByAxios.getCategory().then(res => {
-      //   this.categories = res.data.category.list
-      //   this.categories.forEach((item, index) => {
-      //     this.getSubcategory(item.maitKey, index)
-      //   })
-      // })
-      // jsonp
-      categoryDataByJsonp.getCategory().then(res => {
+      categoryDataByAxios.getCategory().then(res => {
         this.categories = res.data.category.list
         this.categories.forEach((item, index) => {
           this.getSubcategory(item.maitKey, index)
         })
       })
+      // jsonp
+      // categoryDataByJsonp.getCategory().then(res => {
+      //   this.categories = res.data.category.list
+      //   this.categories.forEach((item, index) => {
+      //     this.getSubcategory(item.maitKey, index)
+      //   })
+      // })
     },
     // 获取子分类
     getSubcategory(maitKey, index) {
       // axios
-      // categoryDataByAxios.getSubcategory(maitKey).then(res => {
-      //   Vue.set(this.subcategories, index, res.data.list)
-      // })
-      // jsonp
-      categoryDataByJsonp.getSubcategory(maitKey).then(res => {
+      categoryDataByAxios.getSubcategory(maitKey).then(res => {
         Vue.set(this.subcategories, index, res.data.list)
       })
+      // jsonp
+      // categoryDataByJsonp.getSubcategory(maitKey).then(res => {
+      //   Vue.set(this.subcategories, index, res.data.list)
+      // })
     },
     // 点击侧边菜单
     menuItemClick(index) {
