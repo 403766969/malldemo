@@ -13,7 +13,8 @@
 <script>
 import Vue from 'vue'
 // 分类页面数据
-import categoryDataByAxios from 'network/categoryDataByAxios'
+// import categoryDataByAxios from 'network/categoryDataByAxios'
+import categoryDataByJsonp from 'network/categoryDataByJsonp'
 // 分类页面组件
 import CategoryNavBar from 'views/category/components/CategoryNavBar'
 import CategoryGridView from 'views/category/components/CategoryGridView'
@@ -44,7 +45,15 @@ export default {
   methods: {
     // 获取分类
     getCategory() {
-      categoryDataByAxios.getCategory().then(res => {
+      // axios
+      // categoryDataByAxios.getCategory().then(res => {
+      //   this.categories = res.data.category.list
+      //   this.categories.forEach((item, index) => {
+      //     this.getSubcategory(item.maitKey, index)
+      //   })
+      // })
+      // jsonp
+      categoryDataByJsonp.getCategory().then(res => {
         this.categories = res.data.category.list
         this.categories.forEach((item, index) => {
           this.getSubcategory(item.maitKey, index)
@@ -53,7 +62,12 @@ export default {
     },
     // 获取子分类
     getSubcategory(maitKey, index) {
-      categoryDataByAxios.getSubcategory(maitKey).then(res => {
+      // axios
+      // categoryDataByAxios.getSubcategory(maitKey).then(res => {
+      //   Vue.set(this.subcategories, index, res.data.list)
+      // })
+      // jsonp
+      categoryDataByJsonp.getSubcategory(maitKey).then(res => {
         Vue.set(this.subcategories, index, res.data.list)
       })
     },

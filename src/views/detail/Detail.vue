@@ -32,6 +32,11 @@
 </template>
 
 <script>
+// 商品详情页数据
+// import detailDataByAxios from 'network/detailDataByAxios'
+// import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailDataByAxios'
+import detailDataByJsonp from 'network/detailDataByJsonp'
+import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailDataByJsonp'
 // 商品详情页组件
 import DetailNavBar from 'views/detail/components/DetailNavBar'
 import DetailSwiper from 'views/detail/components/DetailSwiper'
@@ -42,9 +47,6 @@ import DetailGoodsParam from 'views/detail/components/DetailGoodsParam'
 import DetailGoodsComment from 'views/detail/components/DetailGoodsComment'
 import DetailBottomBar from 'views/detail/components/DetailBottomBar'
 import DetailBuyOptions from 'views/detail/components/DetailBuyOptions'
-// 商品详情页数据
-import detailDataByAxios from 'network/detailDataByAxios'
-import { BaseInfo, ShopInfo, GoodsParam } from 'network/detailDataByAxios'
 // 公共组件
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/content/goodsList/GoodsList'
@@ -183,7 +185,28 @@ export default {
     // 1、保存传入的iid
     this.iid = this.$route.params.iid
     // 2.根据iid请求数据
-    detailDataByAxios.getDetailData(this.iid).then(res => {
+    // axios
+    // detailDataByAxios.getDetailData(this.iid).then(res => {
+    //   const data = res.result
+    //   // 商品轮播图
+    //   this.topImages = data.itemInfo.topImages
+    //   // 商品基本信息
+    //   this.baseInfo = new BaseInfo(data.itemInfo, data.columns, data.shopInfo.services)
+    //   // 店铺信息
+    //   this.shopInfo = new ShopInfo(data.shopInfo)
+    //   // 商品详细信息
+    //   this.goodsInfo = data.detailInfo
+    //   // 商品参数信息
+    //   this.goodsParam = new GoodsParam(data.itemParams.info, data.itemParams.rule)
+    //   // 商品评论信息
+    //   if (data.rate.cRate > 0) {
+    //     this.goodsComment = data.rate.list[0]
+    //   }
+    //   // 购买选项信息
+    //   this.buyOptions = data.skuInfo
+    // })
+    // jsonp
+    detailDataByJsonp.getDetailData(this.iid).then(res => {
       const data = res.result
       // 商品轮播图
       this.topImages = data.itemInfo.topImages
@@ -203,7 +226,12 @@ export default {
       this.buyOptions = data.skuInfo
     })
     // 3.请求推荐信息
-    detailDataByAxios.getRecommend().then(res => {
+    // axios
+    // detailDataByAxios.getRecommend().then(res => {
+    //   this.recommends = res.data.list
+    // })
+    // jsonp
+    detailDataByJsonp.getRecommend().then(res => {
       this.recommends = res.data.list
     })
   }

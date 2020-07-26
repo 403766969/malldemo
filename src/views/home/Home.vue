@@ -37,7 +37,8 @@
 
 <script>
 // 首页数据
-import homeDataByAxios from 'network/homeDataByAxios'
+// import homeDataByAxios from 'network/homeDataByAxios'
+import homeDataByJsonp from 'network/homeDataByJsonp'
 // 首页组件
 import HomeNavBar from 'views/home/components/HomeNavBar'
 import HomeSwiper from 'views/home/components/HomeSwiper'
@@ -88,15 +89,27 @@ export default {
   methods: {
     // 获取轮播图和推荐数据
     getMultiData() {
-      homeDataByAxios.getMultiData().then(res => {
+      // axios
+      // homeDataByAxios.getMultiData().then(res => {
+      //   this.banners = res.data.banner.list
+      //   this.recommends = res.data.recommend.list
+      // })
+      // jsonp
+      homeDataByJsonp.getMultiData().then(res => {
         this.banners = res.data.banner.list
         this.recommends = res.data.recommend.list
       })
     },
     // 获取商品列表
     getGoodsData(type) {
+      // axios
+      // this.goodsList[type].page++
+      // homeDataByAxios.getGoodsData(type, this.goodsList[type].page).then(res => {
+      //   this.goodsList[type].list.push(...res.data.list)
+      // })
+      // jsonp
       this.goodsList[type].page++
-      homeDataByAxios.getGoodsData(type, this.goodsList[type].page).then(res => {
+      homeDataByJsonp.getGoodsData(type, this.goodsList[type].page).then(res => {
         this.goodsList[type].list.push(...res.data.list)
       })
     },
