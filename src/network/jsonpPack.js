@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 export function jsonpPack(config) {
 
-  const baseURL = '联系coderwhy老师获取最新接口'
+  const baseURL = '请联系coderwhy老师获取最新接口'
 
   const url = baseURL + (config.url ? config.url : '')
 
